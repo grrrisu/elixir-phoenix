@@ -52,4 +52,12 @@ defmodule Discuss.TopicController do
     end
   end
 
+  def delete(conn, %{"id" => id}) do
+    Repo.get!(Topic, id) |> Repo.delete!
+
+    conn
+    |> put_flash("Topic has been deleted")
+    |> redirect(topic_path(conn, :index))
+  end
+
 end
